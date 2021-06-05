@@ -1,4 +1,4 @@
-const { checkout } = require("../routes/api");
+const { checkout } = require("../../routes/api");
 
 let db;
 const request = indexedDB.open("budget", 1);
@@ -50,3 +50,11 @@ const checkDatabase = () => {
     };
 }
 
+const deletePending = () => {
+    const transaction = db.transaction(["pending"], "readwrite");
+    const store = transaction.objectStore("pending");
+    store.clear();
+}
+
+// added so that the app knows to listen for connecting online 
+window.addEventListener("online", checkDatabase);
