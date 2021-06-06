@@ -1,31 +1,22 @@
-const indexesDB = 
-window.indexedDB ||
-window.mozIndexDB ||
-window.webkitIndexDB ||
-window.msIndexDB ||
-winbow.shimIndexDB;
 
 let db;
+// create new request for db // database name budget //
 const request = indexedDB.open("budget", 1);
 
 
 request.onupgradeneeded = ({ target }) => {
+    // object store called pending // will autoincrement //
     let db = target.results;
     db.createObjectStore("pending", { autoIncrement: true });
 }
 
-// request.onupgradeneeded = function(event) {
-//     const db = event.target.result;
-//     db.createObjectStore("pending", { autoIncrement: true });
-// };
-
-// request.onsuccess = function(event) {
-//     db = event.target.result;
-//     // checks for online status before db is read
-//     if (navigator.onLine) {
-//         checkDatabase();
-//     }
-// };
+request.onsuccess = (event) => {
+    db = event.target.result;
+    // check app for online status // this is done before database is read //
+    if (navigator.onLine) {
+        checkDatabase();
+    }
+}
 
 // request.onerror = function(event) {
 //     console.log("Error, Error, Error " + event.target.errorCode);
