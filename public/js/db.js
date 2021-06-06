@@ -22,13 +22,15 @@ request.onerror = (event) => {
     console.log(event.target.errorCode);
 };
 
+saveRecord = (record) => {
+    const transaction = db.transaction(["pending"], "readwrite"); // transaction created with pending database with read/write access //
+    const store = transaction.objectStore("pending"); // access the pending object store //
+    const getAll = store.getAll(); // get store records // set a variable //
+}
 
-
-// const saveRecord = (record) => {
-//     const transaction = db.transaction(["pending"], "readwrite");
-//     const store = transaction.objectStore("pending");
-//     store.add(record);
-// }
+checkDatabase = () => {
+    const transaction = db.transaction(["pending"], "readwrite"); // opens a transaction on pending daatabase //
+}
 
 // const checkDatabase = () => {
 //     const transaction = db.transaction(["pending"], "readwrite");
