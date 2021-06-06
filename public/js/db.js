@@ -1,3 +1,4 @@
+const { get } = require("../../routes/api");
 
 let db;
 // create new request for db // database name budget //
@@ -25,42 +26,17 @@ request.onerror = (event) => {
 saveRecord = (record) => {
     const transaction = db.transaction(["pending"], "readwrite"); // transaction created with pending database with read/write access //
     const store = transaction.objectStore("pending"); // access the pending object store //
-    const getAll = store.getAll(); // get store records // set a variable //
+    store.add(record) // add method used to add record //
 }
 
 checkDatabase = () => {
-    const transaction = db.transaction(["pending"], "readwrite"); // opens a transaction on pending daatabase //
+    const transaction = db.transaction(["pending"], "readwrite"); // opens a transaction on pending database //
+    const store = transaction.objectStore("pending") // access the pending object store //
+    const getAll = store.getAll(); // get store records // set a variable //
+    getAll.onsuccess = () => {
+        if (getAll.result.length > 0) {
+
+        }
+    }
 }
 
-// const checkDatabase = () => {
-//     const transaction = db.transaction(["pending"], "readwrite");
-//     const store = transaction.objectStore("pending");
-//     const getAll = store.getAll();
-
-//     getAll.onsuccess = () => {
-//         if (getAll.result.length > 0) {
-//             fetch("/api/transaction/bulk", {
-//                 method: "POST",
-//                 body: JSON.stringify(getAll.result),
-//                 header: {
-//                     Accept: "application/json, text/plain, */*",
-//                     "Content-Type": "application/json"
-//                 }
-//             }).then(response => response.json).then(() => {
-//                 // delete record if succesful
-//                 const transaction = db.transaction(["pending"], "readwrite");
-//                 const store = transaction.objectStore("pending");
-//                 store.clear();
-//             });
-//         }
-//     };
-// }
-
-// const deletePending = () => {
-//     const transaction = db.transaction(["pending"], "readwrite");
-//     const store = transaction.objectStore("pending");
-//     store.clear();
-// }
-
-// // added so that the app knows to listen for connecting online 
-// window.addEventListener("online", checkDatabase);
