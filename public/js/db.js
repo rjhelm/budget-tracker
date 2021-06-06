@@ -8,7 +8,7 @@ request.onupgradeneeded = ({ target }) => {
     // object store called pending // will autoincrement //
     let db = target.results;
     db.createObjectStore("pending", { autoIncrement: true });
-}
+};
 
 request.onsuccess = (event) => {
     db = event.target.result;
@@ -16,11 +16,13 @@ request.onsuccess = (event) => {
     if (navigator.onLine) {
         checkDatabase();
     }
-}
+};
 
-// request.onerror = function(event) {
-//     console.log("Error, Error, Error " + event.target.errorCode);
-// };
+request.onerror = (event) => {
+    console.log(event.target.errorCode);
+};
+
+
 
 // const saveRecord = (record) => {
 //     const transaction = db.transaction(["pending"], "readwrite");
