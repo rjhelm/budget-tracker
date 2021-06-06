@@ -35,8 +35,21 @@ checkDatabase = () => {
     const getAll = store.getAll(); // get store records // set a variable //
     getAll.onsuccess = () => {
         if (getAll.result.length > 0) {
-
+            fetch("api/transaction/bulk", {
+                method: "POST",
+                body: JSON.stringify(getAll.result),
+                headers: {
+                    Accept: "application/json text/plain, */*",
+                    "Content-Type": "application/json"
+                }
+            }).then(response => response.json()).then(() => {
+                const transaction = db.transaction(["pending"], "readwrite"); // on success open transaction //
+                const store = transaction.objectStore("pending"); // access to pending store //
+                store.clear(); // clear all items //
+            });
         }
-    }
+    };
 }
 
+// event listener for when app is back online //
+window.addEventListener("online", checkDatabase);
