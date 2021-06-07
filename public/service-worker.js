@@ -4,10 +4,11 @@ const FILES_TO_CACHE = [
     "index.js", 
     "/db.js", 
     "/style.css",
+    
     "/icons/icon-512x512.png",
     "/icons/icon-192x192.png"
 ];
-const CACHE_NAME = "strict-cache-v2";
+const CACHE_NAME = "static-cache-v2";
 const DATA_CACHE_NAME = "data-cache-v1";
 
 // install service worker
@@ -59,11 +60,17 @@ self.addEventListener("fetch", evt => {
         );
         return;
     }
+    
     evt.respondWith(
-        caches.open(CACHE_NAME).then(cache => {
-            return cache.match(evt.request).then(response => {
-                return response || fetch(evt.request); // cached home page returned on requests for html
-            });
+        fetch(evt.request).catch(function () {
+          return caches.match(evt.request).then(function (response) {
+            if (response) {
+              return response;
+            } else if (evt.request.headers.get("accept").includes("text/html")) {
+              // return the cached home page for all requests for html pages
+              return caches.match("/");
+            }
+          });
         })
-    );
-});
+      );
+    });
