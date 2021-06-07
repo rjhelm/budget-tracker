@@ -9,8 +9,8 @@
     <img src="https://img.shields.io/badge/node-orange" />
     <img src="https://img.shields.io/badge/express-purple" />
     <img src="https://img.shields.io/badge/mongodb-blue"  />
-    <img src="https://img.shields.io/badge/javascript-blue"  />
-    <img src="https://img.shields.io/badge/heroku-green" />
+    <img src="https://img.shields.io/badge/heroku-blue"  />
+    <img src="https://img.shields.io/badge/mongoose-green" />
 </p>
 
 ## Description
