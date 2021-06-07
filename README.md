@@ -15,9 +15,9 @@
 
 ## Description
 
-A blogging web app that allows users to register and blog about technology. Users can read other posts and comment on posts, allowing for social interaction among technology enthusiasts.
+A Financial tool that can be accessed and updated by the user whether they have an internet connection or not.
 
-![Tech-Blog](/assets/budget-deployed.PNG)
+![Budget-Tracker](/assets/budget-deployed.PNG)
 
 [Deployed on Heroku](https://limitless-island-38092.herokuapp.com/)
 
@@ -47,20 +47,20 @@ THEN the deposits or expenses added while they were offline are added to their t
 
 Budget Tracker Built With:
 
-- bcrypt
-- connect-session-sequelize
-- dotenv
-- Express.js
+- node
+- express
+- Mongoose
+- MongoDB
+- Morgan
+- Lite Server
 
 ## About
 
-This application follows the Model-View-Controller design pattern. We have a clean codebase that is easy to follow and allows our data to be clearly defined. With everything organized and clear, debugging errors that occured were easy to identify.
+Budget Tracker was built to support offline functionality so that a user can track and update their finances at any time without worrying about a connection.
 
-- Model: The central component of the pattern. It is the application's dynamic data structure, independent of the user interface. It directly manages the data, logic and rules of the application.
+- The app will allow the user to update their financial information while offline and when they are next able to connect to the internet the total is updated to reflect offline data.
 
-- View: Any representation of information such as a chart, diagram or table. Multiple views of the same information are possible, such as a bar chart for management and a tabular view for accountants.
-
-- Controller: Accepts input and converts it to commands for the model or view.
+This app uses indexDB and service workers to store the information entered by the user and updat the data once the connection is re-established. 
 
 ## Contributing
 
